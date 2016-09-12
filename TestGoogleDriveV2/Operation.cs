@@ -10,9 +10,8 @@ namespace GoogleDriveSimpleDemo
 {
     public class Operation
     {
-        /// <summary>
-        /// Insert new file.
-        /// </summary>
+
+        /// Insert file
         /// <param name="service">Drive API service instance.</param>
         /// <param name="title">Title of the file to insert, including the extension.</param>
         /// <param name="description">Description of the file to insert.</param>
@@ -58,13 +57,14 @@ namespace GoogleDriveSimpleDemo
         }
 
 
-        /// Create a new Directory 
+        /// Create a new Folder/Directory
         /// 
         /// a Valid authenticated DriveService
         /// The title of the file. Used to identify file or folder name.
         /// A short description of the file.
         /// Collection of parent folders which contain this file. 
         /// Setting this field will put the file in all of the provided folders. root folder.
+        /// 
         public static File createDirectory(DriveService service, string title, string description, string parent)
         {
 
@@ -90,7 +90,7 @@ namespace GoogleDriveSimpleDemo
         }
 
 
-        /// Uploads a file
+        /// Upload a File
         ///
         /// a Valid authenticated DriveService
         /// path to the file to upload
@@ -98,6 +98,7 @@ namespace GoogleDriveSimpleDemo
         /// Setting this field will put the file in all of the provided folders. root folder.
         /// If upload succeeded returns the File resource of the uploaded file 
         /// If the upload fails returns null
+        /// 
         public static File uploadFile(DriveService service, string filePath, string parent)
         {
 
@@ -138,7 +139,7 @@ namespace GoogleDriveSimpleDemo
             DeleteRequest.Execute();
         }
 
-        // tries to figure out the mime type of the file.
+        // tries to figure out the mime type of the file
         private static string GetMimeType(string fileName)
         {
             string mimeType = "application/unknown";

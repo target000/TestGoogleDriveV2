@@ -74,10 +74,11 @@ namespace DriveQuickstart
             Console.WriteLine("-------------------------------");
             Console.WriteLine();
             Console.WriteLine("insert files");
-            //MyClass.insert
-            MyClass.createDirectory(service, "testCreateFolder", "This is for testing", service.About.Get().Execute().RootFolderId);        
 
-
+            string fileName = "my awesome test folder 426";
+            var testFile = MyClass.createDirectory(service, fileName, "This is for testing", service.About.Get().Execute().RootFolderId);
+            Console.WriteLine( "\"" + fileName + "\"" + " was created ...");
+            Console.WriteLine(testFile.Id +"has been added ...");
 
             Console.Read();
 

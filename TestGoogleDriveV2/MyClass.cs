@@ -7,10 +7,8 @@ using System;
 
 
 
-public class MyClass
+public class Operation
 {
-
-
     /// <summary>
     /// Insert new file.
     /// </summary>
@@ -59,32 +57,27 @@ public class MyClass
     }
 
 
-
-
-    /// Create a new Directory.
-    /// Documentation: https://developers.google.com/drive/v2/reference/files/insert
+    /// Create a new Directory 
     /// 
-
     /// a Valid authenticated DriveService
     /// The title of the file. Used to identify file or folder name.
     /// A short description of the file.
     /// Collection of parent folders which contain this file. 
-    ///                       Setting this field will put the file in all of the provided folders. root folder.
-    /// 
-    public static File createDirectory(DriveService _service, string _title, string _description, string _parent)
+    /// Setting this field will put the file in all of the provided folders. root folder.
+    public static File createDirectory(DriveService service, string title, string description, string parent)
     {
 
         File NewDirectory = null;
 
         // Create metaData for a new Directory
         File body = new File();
-        body.Title = _title;
-        body.Description = _description;
+        body.Title = title;
+        body.Description = description;
         body.MimeType = "application/vnd.google-apps.folder";
-        body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
+        body.Parents = new List<ParentReference>() { new ParentReference() { Id = parent } };
         try
         {
-            FilesResource.InsertRequest request = _service.Files.Insert(body);
+            FilesResource.InsertRequest request = service.Files.Insert(body);
             NewDirectory = request.Execute();
         }
         catch (Exception e)
@@ -95,30 +88,16 @@ public class MyClass
         return NewDirectory;
     }
 
-    // tries to figure out the mime type of the file.
-    private static string GetMimeType(string fileName)
-    {
-        string mimeType = "application/unknown";
-        string ext = System.IO.Path.GetExtension(fileName).ToLower();
-        Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
-        if (regKey != null && regKey.GetValue("Content Type") != null)
-            mimeType = regKey.GetValue("Content Type").ToString();
-        return mimeType;
-    }
-
-    /// 
 
     /// Uploads a file
-    /// Documentation: https://developers.google.com/drive/v2/reference/files/insert
-    /// 
-
+    ///
     /// a Valid authenticated DriveService
     /// path to the file to upload
     /// Collection of parent folders which contain this file. 
-    ///                       Setting this field will put the file in all of the provided folders. root folder.
+    /// Setting this field will put the file in all of the provided folders. root folder.
     /// If upload succeeded returns the File resource of the uploaded file 
-    ///          If the upload fails returns null
-    public static File uploadFile(DriveService _service, string filePath, string _parent)
+    /// If the upload fails returns null
+    public static File uploadFile(DriveService service, string filePath, string parent)
     {
 
         if (System.IO.File.Exists(filePath))
@@ -127,14 +106,14 @@ public class MyClass
             body.Title = System.IO.Path.GetFileName(filePath);
             body.Description = "File uploaded by Diamto Drive Sample";
             body.MimeType = GetMimeType(filePath);
-            body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
+            body.Parents = new List<ParentReference>() { new ParentReference() { Id = parent } };
 
             // File's content.
             byte[] byteArray = System.IO.File.ReadAllBytes(filePath);
             System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
             try
             {
-                FilesResource.InsertMediaUpload request = _service.Files.Insert(body, stream, GetMimeType(filePath));
+                FilesResource.InsertMediaUpload request = service.Files.Insert(body, stream, GetMimeType(filePath));
                 request.Upload();
                 return request.ResponseBody;
             }
@@ -158,13 +137,16 @@ public class MyClass
         DeleteRequest.Execute();
     }
 
-
-    public void test()
+    // tries to figure out the mime type of the file.
+    private static string GetMimeType(string fileName)
     {
-
-    
+        string mimeType = "application/unknown";
+        string ext = System.IO.Path.GetExtension(fileName).ToLower();
+        Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+        if (regKey != null && regKey.GetValue("Content Type") != null)
+            mimeType = regKey.GetValue("Content Type").ToString();
+        return mimeType;
     }
-
 
 
 }

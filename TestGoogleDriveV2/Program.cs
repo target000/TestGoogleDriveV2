@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DriveQuickstart
+namespace GoogleDriveSimpleDemo
 {
     class Program
     {
@@ -78,24 +78,26 @@ namespace DriveQuickstart
 
             // insert a directory/folder
             string folderName = "my awesome test folder 426";
-            var testFolder = MyClass.createDirectory(service, folderName, "This is for testing", service.About.Get().Execute().RootFolderId);
+            var testFolder = Operation.createDirectory(service, folderName, "This is for testing", service.About.Get().Execute().RootFolderId);
             Console.WriteLine("\"" + folderName + "\"" + " was created! ");
 
 
 
             // delete the folder
-            MyClass.deleteFile(service, testFolder.Id);
+            Operation.deleteFile(service, testFolder.Id);
             Console.WriteLine(testFolder.Id + " is now deleted! ");
 
+            Console.WriteLine(" --------  ");
 
             // insert a file
             string fileName = @"C:\hello_drive_1.txt";
-            var testFile = MyClass.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
-            Console.WriteLine("\"" + testFile.Id + "\"" + " was created! ");
+            var testFile = Operation.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
+            Console.WriteLine("\"" + testFile + "\"" + " was created! ");
 
 
             // delete the file
-
+            Operation.deleteFile(service, testFile.Id);
+            Console.WriteLine(testFile.Id + " is now deleted! ");
 
             //
             Console.Read();

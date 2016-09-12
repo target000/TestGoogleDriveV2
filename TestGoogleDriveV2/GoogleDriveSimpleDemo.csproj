@@ -7,7 +7,7 @@
     <ProjectGuid>{56FE578A-6106-420E-AA52-393B133FDC44}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestGoogleDriveV2</RootNamespace>
+    <RootNamespace>GoogleDriveSimpleDemo</RootNamespace>
     <AssemblyName>TestGoogleDriveV2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Operation.cs" />
-    <Compile Include="GoogleDriveSimpleDemo.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

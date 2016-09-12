@@ -75,11 +75,30 @@ namespace DriveQuickstart
             Console.WriteLine();
             Console.WriteLine("insert files");
 
-            string fileName = "my awesome test folder 426";
-            var testFile = MyClass.createDirectory(service, fileName, "This is for testing", service.About.Get().Execute().RootFolderId);
-            Console.WriteLine( "\"" + fileName + "\"" + " was created ...");
-            Console.WriteLine(testFile.Id +"has been added ...");
 
+            // insert a directory/folder
+            string folderName = "my awesome test folder 426";
+            var testFolder = MyClass.createDirectory(service, folderName, "This is for testing", service.About.Get().Execute().RootFolderId);
+            Console.WriteLine("\"" + folderName + "\"" + " was created! ");
+
+
+
+            // delete the folder
+            MyClass.deleteFile(service, testFolder.Id);
+            Console.WriteLine(testFolder.Id + " is now deleted! ");
+
+
+            // insert a file
+            string fileName = @"‪C:\Users\xlu\Desktop\hello_drive_1.txt";
+            //MyClass.uploadFile
+            var testFile = MyClass.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
+            Console.WriteLine("\"" + testFile.Id + "\"" + " was created! ");
+
+
+            // delete the file
+
+
+            //
             Console.Read();
 
         }

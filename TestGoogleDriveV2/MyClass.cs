@@ -118,23 +118,23 @@ public class MyClass
     ///                       Setting this field will put the file in all of the provided folders. root folder.
     /// If upload succeeded returns the File resource of the uploaded file 
     ///          If the upload fails returns null
-    public static File uploadFile(DriveService _service, string _uploadFile, string _parent)
+    public static File uploadFile(DriveService _service, string filePath, string _parent)
     {
 
-        if (System.IO.File.Exists(_uploadFile))
+        if (System.IO.File.Exists(filePath))
         {
             File body = new File();
-            body.Title = System.IO.Path.GetFileName(_uploadFile);
+            body.Title = System.IO.Path.GetFileName(filePath);
             body.Description = "File uploaded by Diamto Drive Sample";
-            body.MimeType = GetMimeType(_uploadFile);
+            body.MimeType = GetMimeType(filePath);
             body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
 
             // File's content.
-            byte[] byteArray = System.IO.File.ReadAllBytes(_uploadFile);
+            byte[] byteArray = System.IO.File.ReadAllBytes(filePath);
             System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
             try
             {
-                FilesResource.InsertMediaUpload request = _service.Files.Insert(body, stream, GetMimeType(_uploadFile));
+                FilesResource.InsertMediaUpload request = _service.Files.Insert(body, stream, GetMimeType(filePath));
                 request.Upload();
                 return request.ResponseBody;
             }
@@ -146,10 +146,23 @@ public class MyClass
         }
         else
         {
-            Console.WriteLine("File does not exist: " + _uploadFile);
+            Console.WriteLine("File does not exist: " + filePath);
             return null;
         }
 
+    }
+
+    public static void deleteFile(DriveService service, String fileID)
+    {
+        FilesResource.DeleteRequest DeleteRequest = service.Files.Delete(fileID);
+        DeleteRequest.Execute();
+    }
+
+
+    public void test()
+    {
+
+    
     }
 
 

@@ -21,19 +21,19 @@ public class Operation
     /// <returns>Inserted file metadata, null is returned if an API error occurred.</returns>
     public static File insertFile(DriveService service, String title, String description, String parentId, String mimeType, String filename)
     {
-        // File's metadata.
+        // File's metadata
         File body = new File();
         body.Title = title;
         body.Description = description;
         body.MimeType = mimeType;
 
-        // Set the parent folder.
+        // Set the parent folder
         if (!String.IsNullOrEmpty(parentId))
         {
             body.Parents = new List<ParentReference>() { new ParentReference() { Id = parentId } };
         }
 
-        // File's content.
+        // File's content
         byte[] byteArray = System.IO.File.ReadAllBytes(filename);
         System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
 
@@ -67,25 +67,25 @@ public class Operation
     public static File createDirectory(DriveService service, string title, string description, string parent)
     {
 
-        File NewDirectory = null;
+        File newFolder = null;
 
-        // Create metaData for a new Directory
+        // Create metaData for a new Directory/Folder
         File body = new File();
         body.Title = title;
         body.Description = description;
-        body.MimeType = "application/vnd.google-apps.folder";
+        body.MimeType = "application/vnd.google-apps.folder"; // this is a folder/dir
         body.Parents = new List<ParentReference>() { new ParentReference() { Id = parent } };
         try
         {
             FilesResource.InsertRequest request = service.Files.Insert(body);
-            NewDirectory = request.Execute();
+            newFolder = request.Execute();
         }
         catch (Exception e)
         {
             Console.WriteLine("An error occurred: " + e.Message);
         }
 
-        return NewDirectory;
+        return newFolder;
     }
 
 
@@ -104,7 +104,7 @@ public class Operation
         {
             File body = new File();
             body.Title = System.IO.Path.GetFileName(filePath);
-            body.Description = "File uploaded by Diamto Drive Sample";
+            body.Description = "File upload";
             body.MimeType = GetMimeType(filePath);
             body.Parents = new List<ParentReference>() { new ParentReference() { Id = parent } };
 

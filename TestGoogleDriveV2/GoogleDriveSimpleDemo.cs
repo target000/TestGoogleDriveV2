@@ -20,7 +20,7 @@ namespace GoogleDriveSimpleDemo
         // at ~/.credentials/drive-dotnet-quickstart.json
         static string[] Scopes = { DriveService.Scope.Drive,
                                    DriveService.Scope.DriveFile };
-        static string ApplicationName = "Drive API .NET Quickstart";
+        static string ApplicationName = "Drive API Demo Test";
 
         static void Main(string[] args)
         {
@@ -29,10 +29,8 @@ namespace GoogleDriveSimpleDemo
             using (var stream =
                 new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
+                string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 credPath = Path.Combine(credPath, ".credentials/drive-dotnet-quickstart.json");
-
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
@@ -54,8 +52,9 @@ namespace GoogleDriveSimpleDemo
             listRequest.MaxResults = 1000;
 
             // List files.
-            IList<Google.Apis.Drive.v2.Data.File> files = listRequest.Execute()
-                .Items;
+            IList<Google.Apis.Drive.v2.Data.File> files = listRequest.Execute().Items;
+
+
             Console.WriteLine("Files:");
             Console.WriteLine("-------------------------------");
 
@@ -92,7 +91,7 @@ namespace GoogleDriveSimpleDemo
             // insert a file
             string fileName = @"C:\hello_drive_1.txt";
             var testFile = Operation.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
-            Console.WriteLine("\"" + testFile + "\"" + " was created! ");
+            Console.WriteLine("\"" + testFile.Title + "\"" + " was created! ");
 
 
             // delete the file

@@ -89,8 +89,7 @@ namespace DriveQuickstart
 
 
             // insert a file
-            string fileName = @"‪C:\Users\xlu\Desktop\hello_drive_1.txt";
-            //MyClass.uploadFile
+            string fileName = @"C:\hello_drive_1.txt";
             var testFile = MyClass.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
             Console.WriteLine("\"" + testFile.Id + "\"" + " was created! ");
 

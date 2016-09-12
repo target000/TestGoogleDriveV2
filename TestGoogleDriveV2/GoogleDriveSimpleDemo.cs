@@ -26,8 +26,7 @@ namespace GoogleDriveSimpleDemo
         {
             UserCredential credential;
 
-            using (var stream =
-                new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 credPath = Path.Combine(credPath, ".credentials/drive-dotnet-quickstart.json");
@@ -40,18 +39,18 @@ namespace GoogleDriveSimpleDemo
                 Console.WriteLine("Credential file saved to: " + credPath);
             }
 
-            // Create Drive API service.
+            // Create Drive API service
             var service = new DriveService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
 
-            // Define parameters of request.
+            // Define parameters of request, note that max can only be 100 as per Google API
             FilesResource.ListRequest listRequest = service.Files.List();
             listRequest.MaxResults = 1000;
 
-            // List files.
+            // List files
             IList<Google.Apis.Drive.v2.Data.File> files = listRequest.Execute().Items;
 
 

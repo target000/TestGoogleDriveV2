@@ -44,7 +44,7 @@ namespace GoogleDriveSimpleDemo
 
 
             // insert a directory/folder
-            string folderName = "my awesome test folder 426";
+            var folderName = "my awesome test folder 426";
             var testFolder = Operation.createDirectory(service, folderName, "This is for testing", service.About.Get().Execute().RootFolderId);
             Console.WriteLine("\"" + folderName + "\"" + " was created! ");
 
@@ -57,14 +57,32 @@ namespace GoogleDriveSimpleDemo
             Console.WriteLine(" --------  ");
 
             // insert a file
-            string fileName = @"C:\hello_drive_1.txt";
-            var testFile = Operation.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
-            Console.WriteLine("\"" + testFile.Title + "\"" + " was created! ");
-
+            var fileName = @"C:\hello_drive_1.txt";
+            var numOfUploads = 3;
+            for (var i = 0; i < numOfUploads; i++)
+            {
+                var testFile = Operation.uploadFile(service, fileName, service.About.Get().Execute().RootFolderId);
+                Console.WriteLine("\"" + testFile.Title + "\"" + " was created! File ID = " + testFile.Id);
+            }
 
             // delete the file
             //Operation.deleteFile(service, testFile.Id);
             //Console.WriteLine(testFile.Id + " is now deleted! ");
+
+
+            // delete code using the displayed hashcode
+            Console.WriteLine("*** Test file deletion on the drive *** ");
+
+            char myChar;
+            do
+            {
+                var toBeDeleted = Console.ReadLine();
+                Operation.deleteFile(service, toBeDeleted);
+                Console.WriteLine("To delete more press y ... ");
+                myChar = Console.ReadKey().KeyChar;
+            } while (myChar == 'y');
+
+
 
             //
             Console.Read();

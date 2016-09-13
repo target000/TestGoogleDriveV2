@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestLocalFile.TestGetSet</StartupObject>
+    <StartupObject>TestLocalFile.TestReadLine</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestReadLine.cs" />
     <Compile Include="TestLocalFileMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGetSet.cs" />

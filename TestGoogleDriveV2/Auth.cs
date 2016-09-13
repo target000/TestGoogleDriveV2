@@ -34,14 +34,12 @@ namespace GoogleDriveSimpleDemo
 
         public Auth()
         {
-
-
             // TODO change the way json is passed
             using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
                 // store credential locally
                 CredPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                CredPath = Path.Combine(CredPath, ".credentials/drive-dotnet-quickstart.json");
+                CredPath = Path.Combine(CredPath, ".credentials/xilu_test.json");
                 Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
@@ -59,12 +57,7 @@ namespace GoogleDriveSimpleDemo
                 ApplicationName = ApplicationName,
             });
 
-
         }
-
-
-
-
 
 
     }

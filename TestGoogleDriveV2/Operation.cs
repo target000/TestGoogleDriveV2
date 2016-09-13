@@ -8,7 +8,7 @@ using System;
 
 namespace GoogleDriveSimpleDemo
 {
-    public class Operation
+    class Operation
     {
 
         /// Insert file

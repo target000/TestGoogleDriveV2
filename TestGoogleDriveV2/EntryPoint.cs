@@ -14,42 +14,14 @@ using System.Threading.Tasks;
 
 namespace GoogleDriveSimpleDemo
 {
-    class Program
+    class EntryPoint
     {
-        // If modifying these scopes, delete your previously saved credentials
-        // at ~/.credentials/drive-dotnet-quickstart.json
-        static string[] Scopes = { DriveService.Scope.Drive,
-                                   DriveService.Scope.DriveFile };
-        static string ApplicationName = "Drive API Demo Test";
 
         static void Main(string[] args)
         {
-            //UserCredential credential;
-
-            //using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
-            //{
-            //    string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            //    credPath = Path.Combine(credPath, ".credentials/drive-dotnet-quickstart.json");
-            //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-            //        GoogleClientSecrets.Load(stream).Secrets,
-            //        Scopes,
-            //        Environment.UserName,
-            //        CancellationToken.None,
-            //        new FileDataStore(credPath, true)).Result;
-            //    Console.WriteLine("Credential file saved to: " + credPath);
-            //}
-
-            //// Create Drive API service
-            //var service = new DriveService(new BaseClientService.Initializer()
-            //{
-            //    HttpClientInitializer = credential,
-            //    ApplicationName = ApplicationName,
-            //});
-
+            // Authenticate 
             Auth auth = new Auth();
             DriveService service = auth.Service;
-            Console.WriteLine(auth.Service);
-
 
             // Define parameters of request, note that max can only be 100 as per Google API
             FilesResource.ListRequest listRequest = service.Files.List();

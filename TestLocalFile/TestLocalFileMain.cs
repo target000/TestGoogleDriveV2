@@ -9,11 +9,12 @@ using System.Security.AccessControl;
 
 namespace TestLocalFile
 {
-    class Program
+    class TestLocalFileMain
     {
         // This method is used to test working with local files
         static void Main(string[] args)
         {
+            // hard coded string for file path
             string filePath = @"C:\hello_drive_1.txt";
 
 
@@ -23,7 +24,7 @@ namespace TestLocalFile
             if (File.Exists(filePath))
             {
                 Console.WriteLine("Yes the file is there");
-            } 
+            }
             else
             {
                 Console.WriteLine("the file does NOT exists");
@@ -38,8 +39,6 @@ namespace TestLocalFile
         public static void AddFileSecurity(string fileName, string account,
             FileSystemRights rights, AccessControlType controlType)
         {
-
-
             // Get a FileSecurity object that represents the
             // current security settings.
             FileSecurity fSecurity = File.GetAccessControl(fileName);

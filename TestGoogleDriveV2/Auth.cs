@@ -15,22 +15,17 @@ namespace GoogleDriveSimpleDemo
 {
     class Auth
     {
-
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/drive-dotnet-quickstart.json
 
-        // TODO if at all possible narrow the scope
         private static string[] Scopes = { DriveService.Scope.Drive,
                                            DriveService.Scope.DriveFile };
         private static string ApplicationName = "Drive API Demo Test";
-
 
         public DriveService Service { get; set; }
         public string CredPath { get; set; }
         public UserCredential Credential { get; set; }
 
-        //private DriveService service = null;
-        //private string credPath = null;
 
         public Auth()
         {

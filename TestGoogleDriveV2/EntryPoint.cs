@@ -16,6 +16,7 @@ namespace GoogleDriveSimpleDemo
 {
     class EntryPoint
     {
+        private const int NUM_OF_RESULTS = 1000;
 
         static void Main(string[] args)
         {
@@ -23,9 +24,9 @@ namespace GoogleDriveSimpleDemo
             Auth auth = new Auth();
             DriveService service = auth.Service;
 
-            // Define parameters of request, note that max can only be 100 as per Google API
+            // Define parameters of request, note max cannot be larger than 1000 as per API
             FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.MaxResults = 1000;
+            listRequest.MaxResults = NUM_OF_RESULTS;
 
             // List files
             IList<Google.Apis.Drive.v2.Data.File> files = listRequest.Execute().Items;
@@ -59,8 +60,8 @@ namespace GoogleDriveSimpleDemo
 
 
             // delete the folder
-            Operation.deleteFile(service, testFolder.Id);
-            Console.WriteLine(testFolder.Id + " is now deleted! ");
+            //Operation.deleteFile(service, testFolder.Id);
+            //Console.WriteLine(testFolder.Id + " is now deleted! ");
 
             Console.WriteLine(" --------  ");
 
@@ -71,8 +72,8 @@ namespace GoogleDriveSimpleDemo
 
 
             // delete the file
-            Operation.deleteFile(service, testFile.Id);
-            Console.WriteLine(testFile.Id + " is now deleted! ");
+            //Operation.deleteFile(service, testFile.Id);
+            //Console.WriteLine(testFile.Id + " is now deleted! ");
 
             //
             Console.Read();

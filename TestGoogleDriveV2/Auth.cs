@@ -1,15 +1,10 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
-using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GoogleDriveSimpleDemo
 {
@@ -17,7 +12,6 @@ namespace GoogleDriveSimpleDemo
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/drive-dotnet-quickstart.json
-
         private static string[] Scopes = { DriveService.Scope.Drive,
                                            DriveService.Scope.DriveFile };
         private static string ApplicationName = "Drive API Demo Test";
